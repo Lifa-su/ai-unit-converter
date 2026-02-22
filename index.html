@@ -52,6 +52,32 @@ header h1{font-size:1.3rem}
 .categories{gap:6px}
 .cat-btn{padding:6px 12px;font-size:.78rem}
 }
+.pro-section{position:relative;width:92%;max-width:500px;margin:24px auto;border-radius:var(--radius);overflow:hidden}
+.pro-blur{filter:blur(4px);pointer-events:none;user-select:none;opacity:.6;padding:24px;background:var(--surface);border-radius:var(--radius)}
+.pro-blur h3{font-size:1rem;margin-bottom:12px;color:var(--text)}
+.pro-blur .pro-mock-row{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.pro-blur .pro-mock-input{flex:1;min-width:120px;padding:10px 14px;background:var(--bg);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:var(--text2);font-size:.85rem}
+.pro-blur .pro-mock-btn{padding:10px 20px;background:var(--accent);border-radius:8px;color:#fff;font-size:.85rem;font-weight:600}
+.pro-blur .pro-mock-table{width:100%;border-collapse:collapse;font-size:.8rem;color:var(--text2)}
+.pro-blur .pro-mock-table td{padding:6px 10px;border-bottom:1px solid rgba(255,255,255,.06)}
+.pro-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;background:rgba(0,0,0,.3);border-radius:var(--radius);z-index:10;transition:background .2s}
+.pro-overlay:hover{background:rgba(0,0,0,.45)}
+.pro-lock{font-size:2.5rem;margin-bottom:8px}
+.pro-label{font-size:1.1rem;font-weight:600;color:#fff}
+.pro-sublabel{font-size:.85rem;color:rgba(255,255,255,.7);margin-top:4px}
+.pro-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.pro-modal-bg.show{display:flex}
+.pro-modal{background:var(--surface);border-radius:16px;padding:32px;max-width:420px;width:90%;text-align:center;animation:proIn .3s ease}
+@keyframes proIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+.pro-modal h2{font-size:1.4rem;margin-bottom:4px}
+.pro-modal .pro-price{font-size:2rem;font-weight:700;color:var(--accent);margin:12px 0}
+.pro-modal ul{text-align:left;list-style:none;margin:16px 0;padding:0}
+.pro-modal li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.95rem}
+.pro-modal li::before{content:'✓ ';color:#2ecc71;font-weight:700}
+.pro-modal .pro-cta{display:block;width:100%;padding:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:10px;color:#fff;font-size:1.1rem;font-weight:600;cursor:pointer;margin-top:16px;text-decoration:none;text-align:center;transition:transform .2s,box-shadow .2s}
+.pro-modal .pro-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(233,69,96,.4)}
+.pro-modal .pro-later{background:none;border:none;color:var(--text2);cursor:pointer;margin-top:12px;font-size:.9rem;padding:8px}
+.pro-modal .pro-later:hover{color:var(--text)}
 </style>
 </head>
 <body>
@@ -202,6 +228,48 @@ onUnitChange();
 initCats();populateSelects();updateFormula();renderFavs();
 $('fromValue').value=1;convert('from');
 </script>
+<!-- Pro Section -->
+<div class="pro-section">
+<div class="pro-blur">
+<h3>📐 Custom Units</h3>
+<div class="pro-mock-row">
+<div class="pro-mock-input">Unit name: Light Year</div>
+<div class="pro-mock-input">Base ratio: 9.461e+15 m</div>
+<div class="pro-mock-btn">+ Add Unit</div>
+</div>
+<h3>📦 Batch Conversion</h3>
+<table class="pro-mock-table">
+<tr><td>100 kg</td><td>→ 220.46 lb</td><td>→ 3527.40 oz</td></tr>
+<tr><td>250 km</td><td>→ 155.34 mi</td><td>→ 820,210 ft</td></tr>
+<tr><td>37.5 °C</td><td>→ 99.5 °F</td><td>→ 310.65 K</td></tr>
+</table>
+<h3 style="margin-top:12px">📊 History Export</h3>
+<div class="pro-mock-row">
+<div class="pro-mock-btn">Export CSV</div>
+<div class="pro-mock-btn">Export JSON</div>
+</div>
+</div>
+<div class="pro-overlay" onclick="document.getElementById('proModal').classList.add('show')">
+<div class="pro-lock">🔒</div>
+<div class="pro-label">Pro Features</div>
+<div class="pro-sublabel">Click to unlock</div>
+</div>
+</div>
+<div class="pro-modal-bg" id="proModal" onclick="if(event.target===this)this.classList.remove('show')">
+<div class="pro-modal">
+<h2>⚡ Unit Converter Pro</h2>
+<div class="pro-price">$9</div>
+<p style="color:var(--text2);font-size:.9rem">One-time payment · Lifetime access</p>
+<ul>
+<li>Custom units — define your own conversion ratios</li>
+<li>Batch conversion — convert multiple values at once</li>
+<li>History export — CSV & JSON download</li>
+<li>Priority support & future updates</li>
+</ul>
+<a class="pro-cta" href="https://feifeicch.gumroad.com/l/ai-unit-converter-pro" target="_blank">Upgrade to Pro — $9</a>
+<button class="pro-later" onclick="document.getElementById('proModal').classList.remove('show')">Maybe later</button>
+</div>
+</div>
 <script src="https://alwingulla.com/88/tag.min.js" data-zone="130747" async data-cfasync="false"></script>
 </body>
 </html>
