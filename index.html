@@ -4,145 +4,174 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Unit Converter - 智能单位转换器</title>
+<meta name="description" content="Free online unit converter. Convert length, weight, temperature, area, volume, speed, and data storage units instantly.">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0f0f13;--surface:#1a1a24;--surface2:#242436;--border:#2e2e45;--text:#e4e4ef;--text2:#9494b8;--accent:#6c5ce7;--accent2:#a29bfe;--glow:rgba(108,92,231,0.15);--green:#00cec9;--red:#ff6b6b;--orange:#fdcb6e;--r:12px}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
-.c{max-width:900px;margin:0 auto;padding:20px}
-header{text-align:center;padding:30px 0 20px}
-header h1{font-size:1.8rem;background:linear-gradient(135deg,var(--accent2),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
-header p{color:var(--text2);font-size:.9rem}
-.nls{margin:20px 0}.nlw{position:relative}
-.nli{width:100%;padding:16px 55px 16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);color:var(--text);font-size:1rem;outline:none;transition:border-color .2s}
-.nli:focus{border-color:var(--accent)}.nli::placeholder{color:var(--text2)}
-.nlb{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:var(--accent);border:none;color:#fff;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center}
-.nlb:hover{background:var(--accent2)}
-.nlr{margin-top:12px;padding:14px 18px;background:var(--glow);border:1px solid var(--accent);border-radius:var(--r);display:none;font-size:1.05rem;animation:fi .3s}
-@keyframes fi{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 16px;justify-content:center}
-.tab{padding:8px 16px;background:var(--surface);border:1px solid var(--border);border-radius:20px;color:var(--text2);cursor:pointer;font-size:.85rem;transition:all .2s;white-space:nowrap}
-.tab:hover{border-color:var(--accent);color:var(--text)}
-.tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px;margin-bottom:20px}
-.row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-.grp{flex:1;min-width:200px}
-.grp label{display:block;color:var(--text2);font-size:.8rem;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
-.grp input{width:100%;padding:14px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:1.2rem;outline:none;transition:border-color .2s}
-.grp input:focus{border-color:var(--accent)}
-.grp select{width:100%;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.95rem;outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239494b8'%3E%3Cpath d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
-.sbtn{background:var(--surface2);border:1px solid var(--border);color:var(--accent2);width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;margin-top:20px}
-.sbtn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
-.res{margin-top:16px;padding:14px 18px;background:var(--surface2);border-radius:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-.res .f{color:var(--text2);font-size:.85rem}.res .v{font-size:1.3rem;font-weight:600;color:var(--green)}
-.fvb{background:none;border:none;color:var(--text2);cursor:pointer;font-size:1.2rem;padding:4px 8px;transition:color .2s}
-.fvb:hover,.fvb.active{color:var(--orange)}
-.favs{margin:20px 0}.favs h3{color:var(--text2);font-size:.9rem;margin-bottom:12px}
-.fl{display:flex;flex-wrap:wrap;gap:8px}
-.fc{padding:8px 14px;background:var(--surface);border:1px solid var(--border);border-radius:20px;color:var(--text);font-size:.85rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px}
-.fc:hover{border-color:var(--accent)}
-.fc .rm{color:var(--red);font-size:.75rem;opacity:.6;cursor:pointer}.fc .rm:hover{opacity:1}
-.cn{text-align:center;color:var(--text2);font-size:.75rem;margin-top:8px}
-footer{text-align:center;padding:30px 0 20px;color:var(--text2);font-size:.8rem}
-@media(max-width:600px){.row{flex-direction:column;gap:12px}.sbtn{margin-top:0;align-self:center;transform:rotate(90deg)}.c{padding:14px}header h1{font-size:1.4rem}.tabs{gap:6px}.tab{padding:6px 12px;font-size:.8rem}}
-select option{background:var(--surface2);color:var(--text)}
-input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
-input[type=number]{-moz-appearance:textfield}
+:root{--bg:#0f0f1a;--sf:#1a1a2e;--sf2:#252540;--ac:#6c63ff;--ac2:#ff6584;--tx:#e8e8f0;--tx2:#9898b0;--bd:#2d2d4a;--r:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;line-height:1.6}
+.ctn{max-width:720px;margin:0 auto;padding:20px 16px 80px}
+header{text-align:center;padding:32px 0 24px}
+h1{font-size:1.8rem;background:linear-gradient(135deg,var(--ac),var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+header p{color:var(--tx2);font-size:.9rem}
+.cats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px}
+.cb{padding:8px 16px;border:1px solid var(--bd);background:var(--sf);color:var(--tx2);border-radius:20px;cursor:pointer;font-size:.85rem;transition:all .2s}
+.cb:hover{border-color:var(--ac);color:var(--tx)}
+.cb.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.box{background:var(--sf);border-radius:var(--r);padding:24px;box-shadow:0 4px 24px rgba(0,0,0,.3);margin-bottom:20px}
+.row{display:flex;gap:12px;align-items:stretch;margin-bottom:16px}
+.row:last-child{margin-bottom:0}
+.ig{flex:1;display:flex;flex-direction:column;gap:6px}
+.ig label{font-size:.8rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px}
+.ig input{background:var(--sf2);border:1px solid var(--bd);color:var(--tx);padding:14px 16px;border-radius:var(--r);font-size:1.1rem;outline:none;transition:border-color .2s;width:100%}
+.ig input:focus{border-color:var(--ac)}
+.ig select{background:var(--sf2);border:1px solid var(--bd);color:var(--tx);padding:12px 16px;border-radius:var(--r);font-size:.95rem;outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239898b0'%3E%3Cpath d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;width:100%}
+.sw{align-self:center;background:var(--sf2);border:1px solid var(--bd);color:var(--ac);width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:all .2s;flex-shrink:0;margin-top:22px}
+.sw:hover{background:var(--ac);color:#fff;transform:rotate(180deg)}
+.res{background:var(--sf2);border-radius:var(--r);padding:16px 20px;text-align:center;margin-top:16px}
+.res .v{font-size:1.6rem;font-weight:700;color:var(--ac)}
+.res .f{font-size:.8rem;color:var(--tx2);margin-top:4px}
+.fb{background:none;border:none;cursor:pointer;font-size:1.3rem;padding:4px 8px;transition:transform .2s}
+.fb:hover{transform:scale(1.2)}
+.fs{margin-top:24px}
+.fs h3{font-size:.95rem;color:var(--tx2);margin-bottom:12px}
+.fl{display:flex;flex-direction:column;gap:8px}
+.fi{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all .2s}
+.fi:hover{border-color:var(--ac);transform:translateY(-1px)}
+.fi .info{font-size:.9rem}
+.fi .info span{color:var(--tx2);font-size:.8rem}
+.fi .del{background:none;border:none;color:var(--tx2);cursor:pointer;font-size:1rem;padding:4px 8px}
+.fi .del:hover{color:var(--ac2)}
+.empty{text-align:center;color:var(--tx2);font-size:.85rem;padding:20px}
+footer{text-align:center;padding:24px 0;color:var(--tx2);font-size:.75rem}
+@media(max-width:480px){.row{flex-direction:column;gap:8px}.sw{align-self:center;margin-top:0;transform:rotate(90deg)}.sw:hover{transform:rotate(270deg)}h1{font-size:1.4rem}.ctn{padding:16px 12px 80px}}
 </style>
 </head>
 <body>
-<div class="c">
-<header><h1>⚡ AI Unit Converter</h1><p>智能单位转换器 · 支持自然语言输入</p></header>
-<div class="nls"><div class="nlw">
-<input type="text" class="nli" id="nlInput" placeholder="试试：5英里等于多少公里、100华氏度转摄氏度、50美元换人民币..." autocomplete="off">
-<button class="nlb" onclick="parseNL()" title="转换">→</button>
-</div><div class="nlr" id="nlResult"></div></div>
-<div class="tabs" id="tabs"></div>
-<div id="converter"></div>
-<div class="favs" id="favsSection" style="display:none"><h3>⭐ 收藏的转换</h3><div class="fl" id="favList"></div></div>
+<div class="ctn">
+<header><h1>⚡ AI Unit Converter</h1><p>智能单位转换器 · 实时转换 · 收藏常用</p></header>
+<div class="cats" id="cats"></div>
+<div class="box">
+<div class="row">
+<div class="ig"><label>从</label><select id="fu" aria-label="源单位"></select></div>
+<button class="sw" id="sw" aria-label="交换单位">⇄</button>
+<div class="ig"><label>到</label><select id="tu" aria-label="目标单位"></select></div>
 </div>
-<footer>AI Unit Converter © 2025</footer>
+<div class="row"><div class="ig"><label>输入值</label><input type="number" id="iv" placeholder="输入数值..." autofocus aria-label="输入数值"></div></div>
+<div class="res">
+<div style="display:flex;justify-content:center;align-items:center;gap:8px">
+<div class="v" id="rv">0</div>
+<button class="fb" id="fvb" aria-label="收藏此转换">☆</button>
+</div>
+<div class="f" id="fm"></div>
+</div>
+</div>
+<div class="fs"><h3>⭐ 收藏的转换</h3><div class="fl" id="fvl"><div class="empty">还没有收藏，点击 ☆ 收藏常用转换</div></div></div>
+<footer>AI Unit Converter &copy; 2026</footer>
+</div>
 <script>
-const D={
-length:{name:'📏 长度',units:{m:'米',km:'千米',cm:'厘米',mm:'毫米',um:'微米',nm:'纳米',mi:'英里',yd:'码',ft:'英尺',in:'英寸',nmi:'海里',li:'里(中国)',zhang:'丈',chi:'尺'},
-base:{m:1,km:1000,cm:0.01,mm:0.001,um:1e-6,nm:1e-9,mi:1609.344,yd:0.9144,ft:0.3048,in:0.0254,nmi:1852,li:500,zhang:3.3333,chi:0.3333}},
-weight:{name:'⚖️ 重量',units:{kg:'千克',g:'克',mg:'毫克',t:'吨',lb:'磅',oz:'盎司',jin:'斤',liang:'两',ct:'克拉',st:'英石'},
-base:{kg:1,g:0.001,mg:1e-6,t:1000,lb:0.453592,oz:0.0283495,jin:0.5,liang:0.05,ct:0.0002,st:6.35029}},
-temperature:{name:'🌡️ 温度',units:{C:'摄氏度(°C)',F:'华氏度(°F)',K:'开尔文(K)'},special:true},
-area:{name:'📐 面积',units:{m2:'平方米',km2:'平方千米',cm2:'平方厘米',ha:'公顷',acre:'英亩',ft2:'平方英尺',in2:'平方英寸',mu:'亩',mi2:'平方英里'},
-base:{m2:1,km2:1e6,cm2:1e-4,ha:1e4,acre:4046.86,ft2:0.092903,in2:6.4516e-4,mu:666.667,mi2:2.59e6}},
-volume:{name:'🧊 体积',units:{L:'升',mL:'毫升',m3:'立方米',cm3:'立方厘米',gal:'加仑(美)',qt:'夸脱',pt:'品脱',cup:'杯',floz:'液盎司',tbsp:'汤匙',tsp:'茶匙'},
-base:{L:1,mL:0.001,m3:1000,cm3:0.001,gal:3.78541,qt:0.946353,pt:0.473176,cup:0.236588,floz:0.0295735,tbsp:0.0147868,tsp:0.00492892}},
-speed:{name:'🚀 速度',units:{mps:'米/秒',kph:'千米/时',mph:'英里/时',knot:'节',fps:'英尺/秒',mach:'马赫'},
-base:{mps:1,kph:0.277778,mph:0.44704,knot:0.514444,fps:0.3048,mach:340.29}},
-data:{name:'💾 数据存储',units:{B:'字节',KB:'千字节',MB:'兆字节',GB:'吉字节',TB:'太字节',PB:'拍字节',bit:'比特',Kb:'千比特',Mb:'兆比特',Gb:'吉比特'},
-base:{B:1,KB:1024,MB:1048576,GB:1073741824,TB:1099511627776,PB:1125899906842624,bit:0.125,Kb:128,Mb:131072,Gb:134217728}},
-time:{name:'⏱️ 时间',units:{s:'秒',ms:'毫秒',us:'微秒',min:'分钟',h:'小时',d:'天',wk:'周',mo:'月(30天)',yr:'年(365天)'},
-base:{s:1,ms:0.001,us:1e-6,min:60,h:3600,d:86400,wk:604800,mo:2592000,yr:31536000}},
-currency:{name:'💱 汇率',units:{USD:'美元',EUR:'欧元',GBP:'英镑',JPY:'日元',CNY:'人民币',KRW:'韩元',AUD:'澳元',CAD:'加元',CHF:'瑞士法郎',HKD:'港币',SGD:'新加坡元',TWD:'新台币'},
-base:{USD:1,EUR:0.92,GBP:0.79,JPY:149.5,CNY:7.24,KRW:1330,AUD:1.53,CAD:1.36,CHF:0.88,HKD:7.82,SGD:1.34,TWD:31.5}}
+const U={
+'长度':{u:{'mm':{n:'毫米 mm',f:.001},'cm':{n:'厘米 cm',f:.01},'m':{n:'米 m',f:1},'km':{n:'千米 km',f:1e3},'in':{n:'英寸 in',f:.0254},'ft':{n:'英尺 ft',f:.3048},'yd':{n:'码 yd',f:.9144},'mi':{n:'英里 mi',f:1609.344}}},
+'重量':{u:{'mg':{n:'毫克 mg',f:.001},'g':{n:'克 g',f:1},'kg':{n:'千克 kg',f:1e3},'t':{n:'吨 t',f:1e6},'oz':{n:'盎司 oz',f:28.3495},'lb':{n:'磅 lb',f:453.592}}},
+'温度':{u:{'C':{n:'摄氏度 °C'},'F':{n:'华氏度 °F'},'K':{n:'开尔文 K'}},temp:true},
+'面积':{u:{'mm2':{n:'平方毫米',f:1e-6},'cm2':{n:'平方厘米',f:1e-4},'m2':{n:'平方米',f:1},'km2':{n:'平方千米',f:1e6},'ha':{n:'公顷',f:1e4},'ac':{n:'英亩',f:4046.86},'ft2':{n:'平方英尺',f:.0929}}},
+'体积':{u:{'ml':{n:'毫升 ml',f:1e-6},'l':{n:'升 L',f:.001},'m3':{n:'立方米',f:1},'gal':{n:'加仑 gal',f:.003785},'qt':{n:'夸脱 qt',f:9.464e-4},'cup':{n:'杯 cup',f:2.366e-4},'floz':{n:'液盎司',f:2.957e-5}}},
+'速度':{u:{'ms':{n:'米/秒',f:1},'kmh':{n:'千米/时',f:.2778},'mph':{n:'英里/时',f:.4470},'kn':{n:'节 knot',f:.5144},'mach':{n:'马赫',f:340.3}}},
+'数据存储':{u:{'b':{n:'字节 B',f:1},'kb':{n:'KB',f:1024},'mb':{n:'MB',f:1048576},'gb':{n:'GB',f:1073741824},'tb':{n:'TB',f:1099511627776},'pb':{n:'PB',f:1125899906842624}}}
 };
-let cur='length',favs=JSON.parse(localStorage.getItem('uc_favs')||'[]');
-function init(){const t=document.getElementById('tabs');t.innerHTML='';for(let k in D){const b=document.createElement('div');b.className='tab'+(k===cur?' active':'');b.textContent=D[k].name;b.onclick=()=>{cur=k;init()};t.appendChild(b)}renderConverter();renderFavs()}
-function renderConverter(){const d=D[cur],el=document.getElementById('converter');
-let opts='';for(let u in d.units)opts+=`<option value="${u}">${d.units[u]} (${u})</option>`;
-const keys=Object.keys(d.units);
-el.innerHTML=`<div class="card"><div class="row">
-<div class="grp"><label>从</label><input type="number" id="valA" value="1" oninput="calc('A')"><select id="unitA" onchange="calc('A')">${opts}</select></div>
-<button class="sbtn" onclick="swap()" title="交换">⇄</button>
-<div class="grp"><label>到</label><input type="number" id="valB" oninput="calc('B')"><select id="unitB" onchange="calc('A')">${opts}</select></div>
-</div><div class="res"><div><span class="v" id="resVal">-</span><div class="f" id="resFormula"></div></div>
-<button class="fvb" id="favBtn" onclick="toggleFav()" title="收藏">☆</button></div>
-${cur==='currency'?'<div class="cn">汇率为参考固定汇率，仅供估算</div>':''}</div>`;
-document.getElementById('unitB').value=keys[Math.min(1,keys.length-1)];calc('A')}
-function convert(v,from,to){const d=D[cur];if(cur==='temperature'){if(from===to)return v;if(from==='C'&&to==='F')return v*9/5+32;if(from==='F'&&to==='C')return(v-32)*5/9;if(from==='C'&&to==='K')return v+273.15;if(from==='K'&&to==='C')return v-273.15;if(from==='F'&&to==='K')return(v-32)*5/9+273.15;if(from==='K'&&to==='F')return(v-273.15)*9/5+32}
-if(cur==='currency')return v*d.base[to]/d.base[from];
-return v*d.base[from]/d.base[to]}
-function fmt(n){if(Math.abs(n)<0.0001&&n!==0)return n.toExponential(6);if(Math.abs(n)>=1e12)return n.toExponential(6);return parseFloat(n.toPrecision(10)).toLocaleString('en-US',{maximumFractionDigits:8})}
-function calc(side){const vA=document.getElementById('valA'),vB=document.getElementById('valB'),uA=document.getElementById('unitA').value,uB=document.getElementById('unitB').value;
-if(side==='A'){const v=parseFloat(vA.value)||0;const r=convert(v,uA,uB);vB.value=fmt(r).replace(/,/g,'');document.getElementById('resVal').textContent=`${fmt(v)} ${D[cur].units[uA]} = ${fmt(r)} ${D[cur].units[uB]}`}
-else{const v=parseFloat(vB.value)||0;const r=convert(v,uB,uA);vA.value=fmt(r).replace(/,/g,'');document.getElementById('resVal').textContent=`${fmt(r)} ${D[cur].units[uA]} = ${fmt(v)} ${D[cur].units[uB]}`}
-document.getElementById('resFormula').textContent=`1 ${D[cur].units[uA]} = ${fmt(convert(1,uA,uB))} ${D[cur].units[uB]}`;updateFavBtn()}
-function swap(){const a=document.getElementById('unitA'),b=document.getElementById('unitB');const t=a.value;a.value=b.value;b.value=t;calc('A')}
-function favKey(){return`${cur}:${document.getElementById('unitA').value}:${document.getElementById('unitB').value}`}
-function updateFavBtn(){const btn=document.getElementById('favBtn');if(!btn)return;const isFav=favs.includes(favKey());btn.textContent=isFav?'★':'☆';btn.className='fvb'+(isFav?' active':'')}
-function toggleFav(){const k=favKey();const i=favs.indexOf(k);if(i>=0)favs.splice(i,1);else favs.push(k);localStorage.setItem('uc_favs',JSON.stringify(favs));updateFavBtn();renderFavs()}
-function renderFavs(){const s=document.getElementById('favsSection'),l=document.getElementById('favList');if(!favs.length){s.style.display='none';return}s.style.display='block';l.innerHTML='';
-favs.forEach((f,i)=>{const[cat,a,b]=f.split(':');if(!D[cat])return;const chip=document.createElement('div');chip.className='fc';
-chip.innerHTML=`<span onclick="loadFav('${cat}','${a}','${b}')">${D[cat].name.slice(2)} ${D[cat].units[a]||a}→${D[cat].units[b]||b}</span><span class="rm" onclick="removeFav(${i})">✕</span>`;l.appendChild(chip)})}
-function loadFav(cat,a,b){cur=cat;init();setTimeout(()=>{document.getElementById('unitA').value=a;document.getElementById('unitB').value=b;calc('A')},50)}
-function removeFav(i){favs.splice(i,1);localStorage.setItem('uc_favs',JSON.stringify(favs));renderFavs()}
-const NL_UNITS={'米':'length:m','千米':'length:km','公里':'length:km','厘米':'length:cm','毫米':'length:mm','英里':'length:mi','英尺':'length:ft','英寸':'length:in','码':'length:yd','海里':'length:nmi','里':'length:li','丈':'length:zhang','尺':'length:chi',
-'千克':'weight:kg','公斤':'weight:kg','克':'weight:g','毫克':'weight:mg','吨':'weight:t','磅':'weight:lb','盎司':'weight:oz','斤':'weight:jin','两':'weight:liang','克拉':'weight:ct',
-'摄氏度':'temperature:C','华氏度':'temperature:F','开尔文':'temperature:K','摄氏':'temperature:C','华氏':'temperature:F',
-'平方米':'area:m2','平方千米':'area:km2','平方公里':'area:km2','公顷':'area:ha','英亩':'area:acre','平方英尺':'area:ft2','亩':'area:mu','平方英里':'area:mi2',
-'升':'volume:L','毫升':'volume:mL','立方米':'volume:m3','加仑':'volume:gal','品脱':'volume:pt',
-'米每秒':'speed:mps','千米每小时':'speed:kph','公里每小时':'speed:kph','英里每小时':'speed:mph','节':'speed:knot','马赫':'speed:mach',
-'字节':'data:B','千字节':'data:KB','兆字节':'data:MB','吉字节':'data:GB','太字节':'data:TB','比特':'data:bit',
-'秒':'time:s','毫秒':'time:ms','分钟':'time:min','小时':'time:h','天':'time:d','周':'time:wk','月':'time:mo','年':'time:yr',
-'美元':'currency:USD','欧元':'currency:EUR','英镑':'currency:GBP','日元':'currency:JPY','人民币':'currency:CNY','元':'currency:CNY','韩元':'currency:KRW','澳元':'currency:AUD','加元':'currency:CAD','瑞士法郎':'currency:CHF','港币':'currency:HKD','新台币':'currency:TWD',
-'km':'length:km','m':'length:m','cm':'length:cm','mm':'length:mm','mile':'length:mi','miles':'length:mi','feet':'length:ft','foot':'length:ft','inch':'length:in','inches':'length:in','yard':'length:yd','yards':'length:yd',
-'kg':'weight:kg','g':'weight:g','mg':'weight:mg','lb':'weight:lb','lbs':'weight:lb','oz':'weight:oz','ton':'weight:t','tons':'weight:t',
-'celsius':'temperature:C','fahrenheit':'temperature:F','kelvin':'temperature:K',
-'liter':'volume:L','liters':'volume:L','ml':'volume:mL','gallon':'volume:gal','gallons':'volume:gal',
-'byte':'data:B','bytes':'data:B','kb':'data:KB','mb':'data:MB','gb':'data:GB','tb':'data:TB',
-'second':'time:s','seconds':'time:s','minute':'time:min','minutes':'time:min','hour':'time:h','hours':'time:h','day':'time:d','days':'time:d','week':'time:wk','weeks':'time:wk','month':'time:mo','months':'time:mo','year':'time:yr','years':'time:yr',
-'usd':'currency:USD','eur':'currency:EUR','gbp':'currency:GBP','jpy':'currency:JPY','cny':'currency:CNY','rmb':'currency:CNY','krw':'currency:KRW','aud':'currency:AUD','cad':'currency:CAD'};
-function parseNL(){const input=document.getElementById('nlInput').value.trim();if(!input)return;
-const res=document.getElementById('nlResult');
-const numMatch=input.match(/[\d.]+/);if(!numMatch){res.style.display='block';res.textContent='请输入数值，如"5英里等于多少公里"';return}
-const val=parseFloat(numMatch[0]);
-let fromUnit=null,toUnit=null;
-const sortedKeys=Object.keys(NL_UNITS).sort((a,b)=>b.length-a.length);
-const lower=input.toLowerCase();
-for(const k of sortedKeys){const kl=k.toLowerCase();const idx=lower.indexOf(kl);if(idx>=0&&!fromUnit){fromUnit={key:k,info:NL_UNITS[k],pos:idx};continue}if(idx>=0&&fromUnit&&!toUnit){toUnit={key:k,info:NL_UNITS[k],pos:idx}}}
-if(!fromUnit){res.style.display='block';res.textContent='无法识别单位，请尝试更明确的表达';return}
-if(!toUnit){const[cat]=fromUnit.info.split(':');const units=Object.keys(D[cat].units);const fromU=fromUnit.info.split(':')[1];const toU=units.find(u=>u!==fromU)||units[0];toUnit={info:cat+':'+toU}}
-const[catA,uA]=fromUnit.info.split(':');const[catB,uB]=toUnit.info.split(':');
-if(catA!==catB){res.style.display='block';res.textContent=`无法在 ${D[catA].name} 和 ${D[catB].name} 之间转换`;return}
-cur=catA;init();
-setTimeout(()=>{document.getElementById('unitA').value=uA;document.getElementById('unitB').value=uB;document.getElementById('valA').value=val;calc('A');
-const r=convert(val,uA,uB);res.style.display='block';res.textContent=`${fmt(val)} ${D[catA].units[uA]} = ${fmt(r)} ${D[catA].units[uB]}`;},60)}
-document.getElementById('nlInput').addEventListener('keydown',e=>{if(e.key==='Enter')parseNL()});
+const $=s=>document.getElementById(s);
+let cat='长度',favs=JSON.parse(localStorage.getItem('uc_favs')||'[]');
+
+function init(){
+const c=$('cats');
+c.innerHTML='';
+Object.keys(U).forEach(k=>{
+const b=document.createElement('button');
+b.className='cb'+(k===cat?' on':'');
+b.textContent=k;
+b.onclick=()=>{cat=k;init()};
+c.appendChild(b);
+});
+fillSel($('fu'));fillSel($('tu'));
+const keys=Object.keys(U[cat].u);
+$('fu').value=keys[0];
+$('tu').value=keys.length>1?keys[1]:keys[0];
+$('iv').value='';$('rv').textContent='0';$('fm').textContent='';
+updFav();convert();
+}
+
+function fillSel(sel){
+sel.innerHTML='';
+Object.entries(U[cat].u).forEach(([k,v])=>{
+const o=document.createElement('option');
+o.value=k;o.textContent=v.n;sel.appendChild(o);
+});
+}
+
+function convert(){
+const v=parseFloat($('iv').value),fr=$('fu').value,to=$('tu').value;
+if(isNaN(v)){$('rv').textContent='0';$('fm').textContent='';updStar();return;}
+let r;
+if(U[cat].temp){
+r=convTemp(v,fr,to);
+}else{
+r=v*U[cat].u[fr].f/U[cat].u[to].f;
+}
+const fmt=Math.abs(r)<.01&&r!==0?r.toExponential(4):
+Math.abs(r)>1e9?r.toExponential(4):
+parseFloat(r.toPrecision(10));
+$('rv').textContent=fmt;
+$('fm').textContent=v+' '+U[cat].u[fr].n+' = '+fmt+' '+U[cat].u[to].n;
+updStar();
+}
+
+function convTemp(v,fr,to){
+let c;
+if(fr==='C')c=v;else if(fr==='F')c=(v-32)*5/9;else c=v-273.15;
+if(to==='C')return c;if(to==='F')return c*9/5+32;return c+273.15;
+}
+
+function updStar(){
+const key=cat+'|'+$('fu').value+'|'+$('tu').value;
+const has=favs.some(f=>f.key===key);
+$('fvb').textContent=has?'★':'☆';
+}
+
+function toggleFav(){
+const fr=$('fu').value,to=$('tu').value;
+const key=cat+'|'+fr+'|'+to;
+const idx=favs.findIndex(f=>f.key===key);
+if(idx>=0){favs.splice(idx,1);}
+else{favs.push({key,cat,fr,to,frN:U[cat].u[fr].n,toN:U[cat].u[to].n});}
+localStorage.setItem('uc_favs',JSON.stringify(favs));
+updStar();updFav();
+}
+
+function updFav(){
+const fl=$('fvl');
+if(!favs.length){fl.innerHTML='<div class="empty">还没有收藏，点击 ☆ 收藏常用转换</div>';return;}
+fl.innerHTML='';
+favs.forEach((f,i)=>{
+const d=document.createElement('div');d.className='fi';
+d.innerHTML='<div class="info">'+f.cat+': '+f.frN+' → '+f.toN+'</div><button class="del" aria-label="删除收藏">✕</button>';
+d.querySelector('.info').onclick=()=>{
+cat=f.cat;init();
+$('fu').value=f.fr;$('tu').value=f.to;convert();
+};
+d.querySelector('.del').onclick=e=>{
+e.stopPropagation();favs.splice(i,1);
+localStorage.setItem('uc_favs',JSON.stringify(favs));updFav();updStar();
+};
+fl.appendChild(d);
+});
+}
+
+$('iv').addEventListener('input',convert);
+$('fu').addEventListener('change',convert);
+$('tu').addEventListener('change',convert);
+$('sw').addEventListener('click',()=>{
+const t=$('fu').value;$('fu').value=$('tu').value;$('tu').value=t;convert();
+});
+$('fvb').addEventListener('click',toggleFav);
 init();
 </script>
 <script src="https://alwingulla.com/88/tag.min.js" data-zone="130747" async data-cfasync="false"></script>
